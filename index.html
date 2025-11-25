@@ -126,15 +126,15 @@
                     <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
                             data-filter="applications" data-value="Whisky">Whisky
                     </button>
-                      <!-- Whisky 子筛选：-->
-                    <div class="sub-filters" id="wine-sub-filters">
-                        <h4 class="text-sm font-medium text-gray-700 mb-2 pl-2">Wine Type</h4>
+                      <!-- Whisky 子筛选：Ingredients-->
+                    <div class="sub-filters" id="whisky-sub-filters">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2 pl-2">Ingredients</h4>
                         <div class="space-y-1 pl-2">
                             <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
-                                    data-filter="wine-type" data-value="Grain whisky">Grain whisky
+                                    data-filter="ingredients" data-value="Grain whisky">Grain whisky
                             </button>
                             <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
-                                    data-filter="wine-type" data-value="Single Malt Whisky">Single Malt Whisky
+                                    data-filter="ingredients" data-value="Single Malt Whisky">Single Malt Whisky
                             </button>
                         </div>
                     </div>
@@ -237,9 +237,10 @@
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-gray-900 text-center mb-4">AM-1</h3>
                         <div class="text-left space-y-2 text-sm text-gray-600">
-                            <p><span class="font-bold text-gray-800">Fermentation: </span> 22-32°C</p>
-                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> >90%</p>
-                            <p><span class="font-bold text-gray-800">Alcohol tolerance: </span> 15% (v/v)</p>
+                            <p><span class="font-bold text-gray-800">Ideal For: </span> Single Malt Whisky</p>
+                            <p><span class="font-bold text-gray-800">Temperature range: </span> 25-35°C</p>
+                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> >98%</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance: </span> 15%ABV</p>
                         </div>
                     </div>
                 </a>
@@ -574,9 +575,10 @@ drawLabels_BV818();
                         </div>
                         <!-- 参数 -->
                         <div class="text-left space-y-2 text-sm text-gray-600 -mt-1">
-                            <p><span class="font-bold text-gray-800">Fermentation: </span> 22-32°C</p>
-                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> >90%</p>
-                            <p><span class="font-bold text-gray-800">Alcohol tolerance: </span> 15% (v/v)</p>
+                            <p><span class="font-bold text-gray-800">Ideal For: </span> Grain whisky/Rum</p>
+                            <p><span class="font-bold text-gray-800">Temperature range: </span> 25-35°C</p>
+                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> >95%</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance: </span> 18% ABV</p>
                         </div>
 
                     </div>
@@ -584,90 +586,90 @@ drawLabels_BV818();
                     <script>
 window.addEventListener("load", () => {
 
-const canvasAM1 = document.getElementById('Whisky-AM-1-wheel');
-const ctxAM1 = canvasAM1.getContext('2d');
+const canvasAG2 = document.getElementById('Whisky-AM-1-wheel');
+const ctxAG2 = canvasAG2.getContext('2d');
 
-const W_AM1 = canvasAM1.width;
-const H_AM1 = canvasAM1.height;
-const cx_AM1 = W_AM1 / 2;
-const cy_AM1 = H_AM1 / 2;
+const W_AG2 = canvasAG2.width;
+const H_AG2 = canvasAG2.height;
+const cx_AG2 = W_AG2 / 2;
+const cy_AG2 = H_AG2 / 2;
 
 const sectors = 12;
 const levels = 5;
-const data_AM1 = [2, 1, 1, 4, 1, 1, 4, 4, 4, 4, 1, 1];
-const labels_AM1 = ['Nutty','Sulphury','Meaty','Lumber','Dark Fruits','Peaty','Cereal','Sweet','Green Apple','Clean','Fruity/Estery','Floral'];
-const padding_AM1 = 10;
-const maxRadius_AM1 = Math.min(W_AM1, H_AM1) * 0.4 - padding_AM1;
-const ringWidth_AM1 = maxRadius_AM1 / levels;
+const data_AG2 = [2, 1, 1, 4, 1, 1, 4, 4, 4, 4, 1, 1];
+const labels_AG2 = ['Nutty','Sulphury','Meaty','Lumber','Dark Fruits','Peaty','Cereal','Sweet','Green Apple','Clean','Fruity/Estery','Floral'];
+const padding_AG2 = 10;
+const maxRadius_AG2 = Math.min(W_AG2, H_AG2) * 0.4 - padding_AG2;
+const ringWidth_AG2 = maxRadius_AG2 / levels;
 
-function drawRings_AM1() {
-  ctxAM1.strokeStyle = "#ddd";
-  ctxAM1.lineWidth = 1;
+function drawRings_AG2() {
+  ctxAG2.strokeStyle = "#ddd";
+  ctxAG2.lineWidth = 1;
   for (let i = 1; i <= levels; i++) {
-    ctxAM1.beginPath();
-    ctxAM1.arc(cx_AM1, cy_AM1, i * ringWidth_AM1, 0, 2 * Math.PI);
-    ctxAM1.stroke();
+    ctxAG2.beginPath();
+    ctxAG2.arc(cx_AG2, cy_AG2, i * ringWidth_AG2, 0, 2 * Math.PI);
+    ctxAG2.stroke();
   }
 }
 
-function drawSectors_AM1() {
-  ctxAM1.strokeStyle = "#ccc";
-  ctxAM1.lineWidth = 1;
+function drawSectors_AG2() {
+  ctxAG2.strokeStyle = "#ccc";
+  ctxAG2.lineWidth = 1;
   for (let i = 0; i < sectors; i++) {
     const angle = (i / sectors) * 2 * Math.PI;
-    const x = cx_AM1 + Math.cos(angle) * maxRadius_AM1;
-    const y = cy_AM1 + Math.sin(angle) * maxRadius_AM1;
-    ctxAM1.beginPath();
-    ctxAM1.moveTo(cx_AM1, cy_AM1);
-    ctxAM1.lineTo(x, y);
-    ctxAM1.stroke();
+    const x = cx_AG2 + Math.cos(angle) * maxRadius_AG2;
+    const y = cy_AG2 + Math.sin(angle) * maxRadius_AG2;
+    ctxAG2.beginPath();
+    ctxAG2.moveTo(cx_AG2, cy_AG2);
+    ctxAG2.lineTo(x, y);
+    ctxAG2.stroke();
   }
 }
 
-function drawLabels_AM1() {
-  ctxAM1.font = "600 " + Math.floor(maxRadius_AM1 * 0.12) + "px Arial";
-  ctxAM1.fillStyle = "#FB923C";
-  ctxAM1.textAlign = "center";
-  ctxAM1.textBaseline = "middle";
+function drawLabels_AG2() {
+  ctxAG2.font = "600 " + Math.floor(maxRadius_AG2 * 0.12) + "px Arial";
+  ctxAG2.fillStyle = "#FB923C";
+  ctxAG2.textAlign = "center";
+  ctxAG2.textBaseline = "middle";
 
   for (let i = 0; i < sectors; i++) {
     const midAngle = (i + 0.5) / sectors * 2 * Math.PI;
-    const x = cx_AM1 + Math.cos(midAngle) * (maxRadius_AM1 + 50);
-    const y = cy_AM1 + Math.sin(midAngle) * (maxRadius_AM1 + 100);
-    ctxAM1.fillText(labels_AM1[i], x, y);
+    const x = cx_AG2 + Math.cos(midAngle) * (maxRadius_AG2 + 50);
+    const y = cy_AG2 + Math.sin(midAngle) * (maxRadius_AG2 + 100);
+    ctxAG2.fillText(labels_AG2[i], x, y);
   }
 }
 
-function drawData_AM1() {
+function drawData_AG2() {
   for (let i = 0; i < sectors; i++) {
-    const score = data_AM1[i];
+    const score = data_AG2[i];
     if (score === 0) continue;
     const startAngle = (i / sectors) * 2 * Math.PI;
     const endAngle = ((i + 1) / sectors) * 2 * Math.PI;
 
     for (let lvl = 0; lvl < score; lvl++) {
-      const innerR = lvl * ringWidth_AM1;
-      const outerR = (lvl + 1) * ringWidth_AM1;
+      const innerR = lvl * ringWidth_AG2;
+      const outerR = (lvl + 1) * ringWidth_AG2;
 
-      ctxAM1.beginPath();
-      ctxAM1.fillStyle = "rgba(251,146,60,0.6)";
-      ctxAM1.strokeStyle = "rgba(251,146,60,1)";
-      ctxAM1.lineWidth = 3;
+      ctxAG2.beginPath();
+      ctxAG2.fillStyle = "rgba(251,146,60,0.6)";
+      ctxAG2.strokeStyle = "rgba(251,146,60,1)";
+      ctxAG2.lineWidth = 3;
 
-      ctxAM1.moveTo(cx_AM1 + innerR * Math.cos(startAngle), cy_AM1 + innerR * Math.sin(startAngle));
-      ctxAM1.arc(cx_AM1, cy_AM1, outerR, startAngle, endAngle, false);
-      ctxAM1.arc(cx_AM1, cy_AM1, innerR, endAngle, startAngle, true);
-      ctxAM1.closePath();
-      ctxAM1.fill();
-      ctxAM1.stroke();
+      ctxAG2.moveTo(cx_AG2 + innerR * Math.cos(startAngle), cy_AG2 + innerR * Math.sin(startAngle));
+      ctxAG2.arc(cx_AG2, cy_AG2, outerR, startAngle, endAngle, false);
+      ctxAG2.arc(cx_AG2, cy_AG2, innerR, endAngle, startAngle, true);
+      ctxAG2.closePath();
+      ctxAG2.fill();
+      ctxAG2.stroke();
     }
   }
 }
 
-drawRings_AM1();
-drawSectors_AM1();
-drawData_AM1();
-drawLabels_AM1();
+drawRings_AG2();
+drawSectors_AG2();
+drawData_AG2();
+drawLabels_AG2();
 
 });
 
@@ -692,23 +694,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearButton = document.getElementById('clear-filters');
     const beerSubFilters = document.getElementById('beer-sub-filters');
     const wineSubFilters = document.getElementById('wine-sub-filters');
+    const whiskySubFilters = document.getElementById('whisky-sub-filters');
     const beerBtn = document.querySelector('button[data-value="Beer"]');
     const wineBtn = document.querySelector('button[data-value="Wine"]');
+    const whiskyBtn = document.querySelector('button[data-value="Whisky"]');
 
     // 辅助：字符串规范化（防空格/大小写）
     function normalize(str) {
         return str ? str.trim().toLowerCase() : '';
     }
 
-    // 统一筛选函数（修复：一致逻辑 + 规范化 + 计数）
+    // 模块化：子面板 toggle 函数（框架复用，便于扩展）
+    function toggleSubFilter(parentBtn, subFilterEl, subSelector) {
+        subFilterEl.classList.toggle('active', parentBtn.classList.contains('active'));
+        if (!parentBtn.classList.contains('active')) {
+            document.querySelectorAll(subSelector).forEach(subBtn => {
+                subBtn.classList.remove('active', 'bg-amber-500', 'text-white');
+                subBtn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+        }
+    }
+
+    // 统一筛选函数（移除空状态提示：聚焦简洁反馈）
     function applyFilters() {
         const selectedProductTypes = Array.from(document.querySelectorAll('.filter-btn[data-filter="product-type"].active')).map(btn => normalize(btn.dataset.value));
         const selectedApplications = Array.from(document.querySelectorAll('.filter-btn[data-filter="applications"].active')).map(btn => normalize(btn.dataset.value));
         const selectedRegionalStyles = Array.from(document.querySelectorAll('.filter-btn[data-filter="regional-style"].active')).map(btn => normalize(btn.dataset.value));
         const selectedWineTypes = Array.from(document.querySelectorAll('.filter-btn[data-filter="wine-type"].active')).map(btn => normalize(btn.dataset.value));
+        const selectedIngredients = Array.from(document.querySelectorAll('.filter-btn[data-filter="ingredients"].active')).map(btn => normalize(btn.dataset.value));
 
         // 调试日志（生产环境移除）
         console.log('Selected Regional Styles:', selectedRegionalStyles);
+        console.log('Selected Ingredients:', selectedIngredients);
 
         let visibleCount = 0;
         productCards.forEach(card => {
@@ -716,36 +733,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const cardApplicationsArr = (card.dataset.applications || '').split(',').map(normalize);
             const cardRegionalStylesArr = (card.dataset.regionalStyle || '').split(',').map(normalize);
             const cardWineTypesArr = (card.dataset.wineType || '').split(',').map(normalize);
+            const cardIngredientsArr = (card.dataset.ingredients || '').split(',').map(normalize);
 
             let showCard = true;
 
             // 统一逻辑：选中值是否在卡片数组中（支持多值）
             if (selectedProductTypes.length > 0 && !selectedProductTypes.some(val => cardProductTypesArr.includes(val))) showCard = false;
             if (selectedApplications.length > 0 && !selectedApplications.some(val => cardApplicationsArr.includes(val))) showCard = false;
-            if (selectedRegionalStyles.length > 0 && !selectedRegionalStyles.some(val => cardRegionalStylesArr.includes(val))) showCard = false;  // 修复：统一为 selected.some(val => cardArr.includes(val))
+            if (selectedRegionalStyles.length > 0 && !selectedRegionalStyles.some(val => cardRegionalStylesArr.includes(val))) showCard = false;
             if (selectedWineTypes.length > 0 && !selectedWineTypes.some(val => cardWineTypesArr.includes(val))) showCard = false;
+            if (selectedIngredients.length > 0 && !selectedIngredients.some(val => cardIngredientsArr.includes(val))) showCard = false;
 
             card.style.display = showCard ? 'block' : 'none';
             if (showCard) visibleCount++;
         });
 
-        // UI 反馈：结果计数（需在 HTML 中添加 <div id="result-count"> 显示 {{count}} 个结果 </div>）
-        const resultCountEl = document.getElementById('result-count');  // 假设添加此元素
-        if (resultCountEl) resultCountEl.textContent = `显示 ${visibleCount} 个结果`;
-
-        // 空状态：若 0，显示提示（需 HTML 支持）
-        if (visibleCount === 0) {
-            const grid = document.getElementById('product-grid');
-            if (!grid.querySelector('.no-results')) {
-                const noResults = document.createElement('div');
-                noResults.className = 'col-span-full text-center py-12 text-gray-500';
-                noResults.innerHTML = '<p>无匹配产品。尝试调整筛选条件。</p>';
-                grid.appendChild(noResults);
-            }
-        } else {
-            const noResults = grid.querySelector('.no-results');
-            if (noResults) noResults.remove();
-        }
+        // UI 反馈：结果计数（简洁显示 0 时无额外提示，保持框架轻量）
+        const resultCountEl = document.getElementById('result-count');
+        if (resultCountEl) resultCountEl.textContent = `显示 ${visibleCount} 个结果 (总 ${productCards.length})`;
     }
 
     // 按钮事件：toggle active + 样式 + 子面板控制
@@ -760,26 +765,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.classList.add('text-gray-600', 'hover:bg-gray-100');
             }
 
-            // Beer 子筛选：条件展开
+            // Beer 子筛选
             if (this === beerBtn) {
-                beerSubFilters.classList.toggle('active', this.classList.contains('active'));
-                if (!this.classList.contains('active')) {
-                    document.querySelectorAll('#beer-sub-filters .filter-btn').forEach(subBtn => {
-                        subBtn.classList.remove('active', 'bg-amber-500', 'text-white');
-                        subBtn.classList.add('text-gray-600', 'hover:bg-gray-100');
-                    });
-                }
+                toggleSubFilter(this, beerSubFilters, '#beer-sub-filters .filter-btn');
             }
 
             // Wine 子筛选
             if (this === wineBtn) {
-                wineSubFilters.classList.toggle('active', this.classList.contains('active'));
-                if (!this.classList.contains('active')) {
-                    document.querySelectorAll('#wine-sub-filters .filter-btn').forEach(subBtn => {
-                        subBtn.classList.remove('active', 'bg-amber-500', 'text-white');
-                        subBtn.classList.add('text-gray-600', 'hover:bg-gray-100');
-                    });
-                }
+                toggleSubFilter(this, wineSubFilters, '#wine-sub-filters .filter-btn');
+            }
+
+            // Whisky 子筛选
+            if (this === whiskyBtn) {
+                toggleSubFilter(this, whiskySubFilters, '#whisky-sub-filters .filter-btn');
             }
 
             applyFilters();
@@ -794,6 +792,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         beerSubFilters.classList.remove('active');
         wineSubFilters.classList.remove('active');
+        whiskySubFilters.classList.remove('active');
         applyFilters();
     });
 
@@ -801,6 +800,5 @@ document.addEventListener('DOMContentLoaded', function() {
     applyFilters();
 });
 </script>
-
 </body>
 </html>
