@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Angel Beer Yeast Series</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    .card {
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+    }
+    .card:hover .overlay {
+      opacity: 1;
+    }
+    .overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .sub-filters {
+      display: none;
+      margin-top: 8px;
+      padding-left: 8px;
+      border-left: 2px solid #f59e0b;
+    }
+    .sub-filters.active {
+      display: block;
+    }
+
+    </style>
+</head>
+<body class="bg-gray-100 py-16">
+
+<div class="max-w-7xl mx-auto px-6">
+    <h1 class="text-5xl font-bold text-center text-amber-800 mb-12">Angel Alcoholic Beverages</h1>
+
+    <!-- 布局容器：左侧筛选 + 右侧产品网格 -->
+    <div class="flex gap-8">
+        <!-- 左侧筛选面板 -->
+        <div class="w-64 bg-white rounded-2xl shadow-lg p-6 sticky top-8 h-fit">
+            <h2 class="text-xl font-bold text-gray-900 mb-6 text-center">Filters</h2>
+
+            <!-- Product Type 部分 -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Product Type</h3>
+                <div class="space-y-2">
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="product-type" data-value="Brewing-yeast">Brewing yeast
+                    </button>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="product-type" data-value="Fermentation-Preparations">Fermentation Preparations
+                    </button>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="product-type" data-value="Brewing-Auxiliaries">Brewing Auxiliaries
+                    </button>
+                </div>
+            </div>
+
+            <!-- Applications 部分 -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Applications</h3>
+                <div class="space-y-2">
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="applications" data-value="Beer">Beer
+                    </button>
+                    <!-- Beer 子筛选：Regional Style -->
+                    <div class="sub-filters" id="beer-sub-filters">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2 pl-2">Regional Style</h4>
+                        <div class="space-y-1 pl-2">
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="regional-style" data-value="Lager-Beer">Lager Beer
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="regional-style" data-value="American-Origin-Style">American Origin
+                                Style
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="regional-style" data-value="Irish-Origin-style">Irish Origin style
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="regional-style" data-value="German-Origin-style">German Origin style
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="regional-style" data-value="British-Origin-style">British Origin style
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="regional-style" data-value="Belgian-Origin-style">Belgian Origin style
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="regional-style" data-value="Czech-Origin-style">Czech Origin style
+                            </button>
+                        </div>
+                    </div>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="applications" data-value="Wine">Wine
+                    </button>
+                    <div class="sub-filters" id="wine-sub-filters">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2 pl-2">Wine Type</h4>
+                        <div class="space-y-1 pl-2">
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="wine-type" data-value="Red Wine">Red Wine
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="wine-type" data-value="White Wine">White Wine
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="wine-type" data-value="Rose Wine">Rose Wine
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="wine-type" data-value="Sparkling Wine">Sparkling Wine
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="wine-type" data-value="Dry Red Wine">Dry Red Wine
+                            </button>
+                            <button class="filter-btn w-full text-left px-2 py-1 rounded-md text-xs text-gray-600 hover:bg-gray-100 transition"
+                                    data-filter="wine-type" data-value="Non-Saccharomyces">Non-Saccharomyces
+                            </button>
+                        </div>
+                    </div>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="applications" data-value="Whisky">Whisky
+                    </button>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="applications" data-value="Vodka">Vodka
+                    </button>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="applications" data-value="Rum">Rum
+                    </button>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="applications" data-value="Tequila">Tequila
+                    </button>
+                    <button class="filter-btn w-full text-left px-3 py-2 rounded-lg text-sm text-gray-600 hover:bg-gray-100 transition"
+                            data-filter="applications" data-value="Mezcal">Mezcal
+                    </button>
+                </div>
+            </div>
+
+            <!-- 清空筛选按钮 -->
+            <button class="mt-6 w-full bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 transition"
+                    id="clear-filters">Clear All
+            </button>
+        </div>
+
+        <!-- 右侧产品网格 -->
+        <div class="flex-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-10" id="product-grid">
+
+
+                <a class="card block rounded-2xl shadow-lg overflow-hidden bg-white group product-card"
+                   data-applications="Beer" data-product-type="Brewing-yeast" data-regional-style="Lager-Beer"
+                   href="/product/lager-bf27">
+                    <div class="relative h-64 bg-gray-50 overflow-hidden">
+                        <img alt="Lager BF27"
+                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                             src="./image/Lager-BF27.jpg">
+
+                        <div class="overlay absolute inset-0 flex items-end justify-center pb-6">
+                            <span class="text-white text-lg font-semibold opacity-100">
+                                View Details →
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 text-center mb-4">Lager-BF27</h3>
+                        <div class="text-left space-y-2 text-sm text-gray-600">
+                            <p><span class="font-bold text-gray-800">Temperature range:</span> 10-20°C(50-68°F)</p>
+                            <p><span class="font-bold text-gray-800">Ideally:</span> 10-15°C(50-59°F)</p>
+                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> 80-85%</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance:</span>10%ABV</p>
+                            <p><span class="font-bold text-gray-800">Flocculation:</span> High</p>
+                        </div>
+                    </div>
+                </a>
+
+
+                <a class="card block rounded-2xl shadow-lg overflow-hidden bg-white group product-card"
+                   data-applications="Wine" data-product-type="Brewing-yeast" data-wine-type="Red Wine"
+                   href="/product/BV818">
+                    <div class="relative h-64 bg-gray-50 overflow-hidden">
+                        <img alt="Wine-yeast-BV818"
+                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                             src="./image/Wine-yeast-BV818.jpg">
+
+                        <div class="overlay absolute inset-0 flex items-end justify-center pb-6">
+                            <span class="text-white text-lg font-semibold opacity-100">
+                                View Details →
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 text-center mb-4">BV818</h3>
+                        <div class="text-left space-y-2 text-sm text-gray-600">
+                            <p><span class="font-bold text-gray-800">Wine Type:</span>Sparkling, Whites, Red, Rose</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance:</span> Up to 18%vol</p>
+                            <p><span class="font-bold text-gray-800">Nitrogen requirement:</span> Low</p>
+                            <p><span class="font-bold text-gray-800">Production of volatile acidity:</span> Low</p>
+                            <p><span class="font-bold text-gray-800">Production of H<sub>2</sub>S:</span> Low</p>
+                            <p><span class="font-bold text-gray-800">Production of foam:</span> Low</p>
+                        </div>
+                    </div>
+                </a>
+
+
+                <a class="card block rounded-2xl shadow-lg overflow-hidden bg-white group product-card"
+                   data-applications="Whisky" data-product-type="Brewing-yeast" href="/product/Whisky AM-1">
+                    <div class="relative h-64 bg-gray-50 overflow-hidden">
+                        <img alt="Whisky AM-1"
+                             class="w-full h-full object-contain group-hover:scale-110 transition duration-500"
+                             src="./image/Whisky AM-1.jpg">
+
+                        <div class="overlay absolute inset-0 flex items-end justify-center pb-6">
+                            <span class="text-white text-lg font-semibold opacity-100">
+                                View Details →
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 text-center mb-4">Whisky AM-1</h3>
+                        <div class="text-left space-y-2 text-sm text-gray-600">
+                            <p><span class="font-bold text-gray-800">Fermentation: </span> 22-32°C</p>
+                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> >90%</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance: </span> 15% (v/v)</p>
+                        </div>
+                    </div>
+                </a>
+
+
+                <a class="card block rounded-2xl shadow-lg overflow-hidden bg-white group product-card"
+                   data-applications="Beer" data-product-type="Brewing-yeast" data-regional-style="Lager-Beer"
+                   href="/product/lager-bf27">
+
+                    <!-- 图片区域 -->
+                    <div class="relative h-50 bg-gray-50 overflow-hidden">
+                        <img alt="Lager BF27"
+                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                             src="./image/Lager-BF27.jpg">
+
+                        <!-- 悬停时出现的浅色遮罩 + 小箭头提示 -->
+                        <div class="overlay absolute inset-0 flex items-end justify-center pb-6">
+      <span class="text-white text-lg font-semibold opacity-100">
+        View Details →
+      </span>
+                        </div>
+                    </div>
+
+                    <!-- 内容区域 -->
+                    <div class="p-6 pt-4">
+
+                        <!-- 标题 -->
+                        <h3 class="text-3xl font-black text-center leading-tight mb-0">Lager BF27</h3>
+
+
+                        <div class="w-full mt-5 mb-5 flex justify-center">
+                            <div class="relative" style="width:200px; height:200px;">
+                                <canvas
+                                        height="1000"
+                                        id="lager-bf27-wheel"
+                                        style="width:100%; height:100%; display:block;"
+                                        width="1000"
+                                ></canvas>
+                            </div>
+                        </div>
+                        <!-- 参数 -->
+                        <div class="text-left space-y-2 text-sm text-gray-600 -mt-1">
+                            <p><span class="font-bold text-gray-800">Temperature range:</span> 10-20°C(50-68°F)</p>
+                            <p><span class="font-bold text-gray-800">ldeally:</span> 10-15°C(50-59°F)</p>
+                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> 80-85%</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance:</span>10%ABV</p>
+                            <p><span class="font-bold text-gray-800">Flocculation:</span> High</p>
+                        </div>
+
+                    </div>
+
+                    <script>
+const canvas = document.getElementById('lager-bf27-wheel');
+const ctx = canvas.getContext('2d');
+
+// ----- 配置 -----
+const W = canvas.width;
+const H = canvas.height;
+const cx = W/2;
+const cy = H/2;
+
+const sectors = 8;         // 扇形数量
+const levels = 5;          // 分数等级
+const data = [5,0,0,0,0,1,0,1];  // 示例数据
+const labels = ['Neutral','Red berries','Tropical fruit','Banana','Clove','Acid','Pepper & spice','Pear'];
+
+// 自适应最大半径（占 canvas 较小边的 40%）
+const maxRadius = Math.min(W,H)*0.4;
+const ringWidth = maxRadius / levels;
+
+// ----- 绘制同心圆等级 -----
+function drawRings(){
+  ctx.strokeStyle="#ddd";
+  ctx.lineWidth = 1;
+  for(let i=1;i<=levels;i++){
+    ctx.beginPath();
+    ctx.arc(cx,cy,i*ringWidth,0,2*Math.PI);
+    ctx.stroke();
+  }
+}
+
+// ----- 绘制扇形分割线 -----
+function drawSectors(){
+  ctx.strokeStyle="#ccc";
+  ctx.lineWidth = 1;
+  for(let i=0;i<sectors;i++){
+    const angle = (i/sectors)*2*Math.PI;
+    const x = cx + Math.cos(angle)*maxRadius;
+    const y = cy + Math.sin(angle)*maxRadius;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(x,y);
+    ctx.stroke();
+  }
+}
+
+// ----- 绘制标签（始终水平，自动缩放） -----
+function drawLabels(){
+  ctx.font ="600 " + Math.floor(maxRadius*0.12) + "px Arial"; // 标签字体自适应
+  ctx.fillStyle = "#FB923C";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  for(let i=0;i<sectors;i++){
+    const midAngle = (i+0.5)/sectors * 2 * Math.PI;
+    const x = cx + Math.cos(midAngle)*(maxRadius+20);
+    const y = cy + Math.sin(midAngle)*(maxRadius+20);
+    ctx.fillText(labels[i], x, y);
+  }
+}
+
+// ----- 根据数据填充扇形环 -----
+function drawData(){
+  for(let i=0;i<sectors;i++){
+    const score = data[i];
+    if(score===0) continue;
+
+    const startAngle = (i/sectors)*2*Math.PI;
+    const endAngle = ((i+1)/sectors)*2*Math.PI;
+
+    for(let lvl=0;lvl<score;lvl++){
+      const innerR = lvl*ringWidth;
+      const outerR = (lvl+1)*ringWidth;
+
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(251,146,60,0.6)";
+      ctx.strokeStyle = "rgba(251,146,60,1)";
+      ctx.lineWidth = 3;
+
+      // 绘制环状扇形
+      ctx.moveTo(cx + innerR*Math.cos(startAngle), cy + innerR*Math.sin(startAngle));
+      ctx.arc(cx, cy, outerR, startAngle, endAngle, false);
+      ctx.arc(cx, cy, innerR, endAngle, startAngle, true);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+}
+
+// ----- 绘制流程 -----
+drawRings();
+drawSectors();
+drawData();
+drawLabels();
+
+
+
+
+                    </script>
+
+                </a>
+
+
+                <a class="card block rounded-2xl shadow-lg overflow-hidden bg-white group product-card"
+                   data-applications="Wine" data-product-type="Brewing-yeast" data-wine-type="Red Wine"
+                   href="/product/BV818">
+
+                    <!-- 图片区域 -->
+                    <div class="relative h-50 bg-gray-50 overflow-hidden">
+                        <img alt="Wine-yeast-BV818"
+                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                             src="./image/Wine-yeast-BV818.jpg">
+
+                        <!-- 悬停时出现的浅色遮罩 + 小箭头提示 -->
+                        <div class="overlay absolute inset-0 flex items-end justify-center pb-6">
+                            <span class="text-white text-lg font-semibold opacity-100">
+                                View Details →
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 内容区域 -->
+                    <div class="p-6 pt-4">
+
+                        <!-- 标题 -->
+                        <h3 class="text-3xl font-black text-center leading-tight mb-0">BV818</h3>
+
+
+                        <div class="w-full mt-5 mb-5 flex justify-center">
+                            <div class="relative" style="width:200px; height:200px;">
+                                <canvas
+                                        height="1000"
+                                        id="BV818-wheel"
+                                        style="width:100%; height:100%; display:block;"
+                                        width="1000"
+                                ></canvas>
+                            </div>
+                        </div>
+
+                        <!-- 参数 -->
+                        <div class="text-left space-y-2 text-sm text-gray-600 -mt-1">
+                            <p><span class="font-bold text-gray-800">Nitrogen requirement:</span> Low</p>
+                            <p><span class="font-bold text-gray-800">Production of H<sub>2</sub>S:</span> Low</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance:</span> Up to 18%vol</p>
+                            <p><span class="font-bold text-gray-800">Production of volatile acidity:</span> Low</p>
+                        </div>
+
+                    </div>
+
+                    <script>
+window.addEventListener("load", () => {
+
+const canvasBV818 = document.getElementById('BV818-wheel');
+const ctxBV818 = canvasBV818.getContext('2d');
+
+const W_BV818 = canvasBV818.width;
+const H_BV818 = canvasBV818.height;
+const cx_BV818 = W_BV818 / 2;
+const cy_BV818 = H_BV818 / 2;
+
+const sectors = 6;
+const levels = 4;
+const data_BV818 = [2, 4, 3, 4, 0, 0];
+const labels_BV818 = ['Reds','Sparkling','Rosé','White','Non-Saccharomyces','Dry'];
+const padding_BV818 = 10;
+const maxRadius_BV818 = Math.min(W_BV818, H_BV818) * 0.4-padding_BV818;
+const ringWidth_BV818 = maxRadius_BV818 / levels;
+
+function drawRings_BV818() {
+  ctxBV818.strokeStyle = "#ddd";
+  ctxBV818.lineWidth = 1;
+  for (let i = 1; i <= levels; i++) {
+    ctxBV818.beginPath();
+    ctxBV818.arc(cx_BV818, cy_BV818, i * ringWidth_BV818, 0, 2 * Math.PI);
+    ctxBV818.stroke();
+  }
+}
+
+function drawSectors_BV818() {
+  ctxBV818.strokeStyle = "#ccc";
+  ctxBV818.lineWidth = 1;
+  for (let i = 0; i < sectors; i++) {
+    const angle = (i / sectors) * 2 * Math.PI;
+    const x = cx_BV818 + Math.cos(angle) * maxRadius_BV818;
+    const y = cy_BV818 + Math.sin(angle) * maxRadius_BV818;
+    ctxBV818.beginPath();
+    ctxBV818.moveTo(cx_BV818, cy_BV818);
+    ctxBV818.lineTo(x, y);
+    ctxBV818.stroke();
+  }
+}
+
+function drawLabels_BV818() {
+  ctxBV818.font = "600 " + Math.floor(maxRadius_BV818 * 0.12) + "px Arial";
+  ctxBV818.fillStyle = "#7B1E3C";
+  ctxBV818.textAlign = "center";
+  ctxBV818.textBaseline = "middle";
+
+  for (let i = 0; i < sectors; i++) {
+    const midAngle = (i + 0.5) / sectors * 2 * Math.PI;
+    const x = cx_BV818 + Math.cos(midAngle) * (maxRadius_BV818 + 100);
+    const y = cy_BV818 + Math.sin(midAngle) * (maxRadius_BV818 + 50);
+    ctxBV818.fillText(labels_BV818[i], x, y);
+  }
+}
+
+function drawData_BV818() {
+  for (let i = 0; i < sectors; i++) {
+    const score = data_BV818[i];
+    if (score === 0) continue;
+    const startAngle = (i / sectors) * 2 * Math.PI;
+    const endAngle = ((i + 1) / sectors) * 2 * Math.PI;
+
+    for (let lvl = 0; lvl < score; lvl++) {
+      const innerR = lvl * ringWidth_BV818;
+      const outerR = (lvl + 1) * ringWidth_BV818;
+
+      ctxBV818.beginPath();
+      ctxBV818.fillStyle = "rgba(123,30,60,0.6)";
+      ctxBV818.strokeStyle = "rgba(123,30,60,1)";
+      ctxBV818.lineWidth = 3;
+
+      ctxBV818.moveTo(cx_BV818 + innerR * Math.cos(startAngle), cy_BV818 + innerR * Math.sin(startAngle));
+      ctxBV818.arc(cx_BV818, cy_BV818, outerR, startAngle, endAngle, false);
+      ctxBV818.arc(cx_BV818, cy_BV818, innerR, endAngle, startAngle, true);
+      ctxBV818.closePath();
+      ctxBV818.fill();
+      ctxBV818.stroke();
+    }
+  }
+}
+
+drawRings_BV818();
+drawSectors_BV818();
+drawData_BV818();
+drawLabels_BV818();
+
+});
+
+
+
+
+                    </script>
+
+                </a>
+
+
+                <a class="card block rounded-2xl shadow-lg overflow-hidden bg-white group product-card"
+                   data-applications="Whisky" data-product-type="Brewing-yeast" href="/product/Whisky AM-1">
+                    <div class="relative h-50 bg-gray-50 overflow-hidden">
+                        <img alt="Whisky AM-1"
+                             class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                             src="./image/Whisky AM-1.jpg">
+                        <!-- 悬停时出现的浅色遮罩 + 小箭头提示 -->
+                        <div class="overlay absolute inset-0 flex items-end justify-center pb-6">
+                  <span class="text-white text-lg font-semibold opacity-100">
+                      View Details →
+                  </span>
+                        </div>
+                    </div>
+                    <!-- 内容区域 -->
+                    <div class="p-6 pt-4">
+                        <!-- 标题 -->
+                        <h3 class="text-3xl font-black text-center leading-tight mb-0">Whisky AM-1</h3>
+
+                        <div class="w-full mt-5 mb-5 flex justify-center">
+                            <div class="relative" style="width:230px; height:230px;">
+                                <canvas
+                                        height="1000"
+                                        id="Whisky-AM-1-wheel"
+                                        style="width:100%; height:100%; display:block;"
+                                        width="1000"
+                                ></canvas>
+                            </div>
+                        </div>
+                        <!-- 参数 -->
+                        <div class="text-left space-y-2 text-sm text-gray-600 -mt-1">
+                            <p><span class="font-bold text-gray-800">Fermentation: </span> 22-32°C</p>
+                            <p><span class="font-bold text-gray-800">Apparent attenuation:</span> >90%</p>
+                            <p><span class="font-bold text-gray-800">Alcohol tolerance: </span> 15% (v/v)</p>
+                        </div>
+
+                    </div>
+
+                    <script>
+window.addEventListener("load", () => {
+
+const canvasAM1 = document.getElementById('Whisky-AM-1-wheel');
+const ctxAM1 = canvasAM1.getContext('2d');
+
+const W_AM1 = canvasAM1.width;
+const H_AM1 = canvasAM1.height;
+const cx_AM1 = W_AM1 / 2;
+const cy_AM1 = H_AM1 / 2;
+
+const sectors = 12;
+const levels = 5;
+const data_AM1 = [2, 1, 2, 1, 1, 1, 2, 2, 3, 1, 4, 3];
+const labels_AM1 = ['Nutty','Sulphury','Meaty','Lumber','Dark Fruits','Peaty','Cereal','Sweet','Green Apple','Clean','Fruity/Estery','Floral'];
+const padding_AM1 = 10;
+const maxRadius_AM1 = Math.min(W_AM1, H_AM1) * 0.4 - padding_AM1;
+const ringWidth_AM1 = maxRadius_AM1 / levels;
+
+function drawRings_AM1() {
+  ctxAM1.strokeStyle = "#ddd";
+  ctxAM1.lineWidth = 1;
+  for (let i = 1; i <= levels; i++) {
+    ctxAM1.beginPath();
+    ctxAM1.arc(cx_AM1, cy_AM1, i * ringWidth_AM1, 0, 2 * Math.PI);
+    ctxAM1.stroke();
+  }
+}
+
+function drawSectors_AM1() {
+  ctxAM1.strokeStyle = "#ccc";
+  ctxAM1.lineWidth = 1;
+  for (let i = 0; i < sectors; i++) {
+    const angle = (i / sectors) * 2 * Math.PI;
+    const x = cx_AM1 + Math.cos(angle) * maxRadius_AM1;
+    const y = cy_AM1 + Math.sin(angle) * maxRadius_AM1;
+    ctxAM1.beginPath();
+    ctxAM1.moveTo(cx_AM1, cy_AM1);
+    ctxAM1.lineTo(x, y);
+    ctxAM1.stroke();
+  }
+}
+
+function drawLabels_AM1() {
+  ctxAM1.font = "600 " + Math.floor(maxRadius_AM1 * 0.12) + "px Arial";
+  ctxAM1.fillStyle = "#FB923C";
+  ctxAM1.textAlign = "center";
+  ctxAM1.textBaseline = "middle";
+
+  for (let i = 0; i < sectors; i++) {
+    const midAngle = (i + 0.5) / sectors * 2 * Math.PI;
+    const x = cx_AM1 + Math.cos(midAngle) * (maxRadius_AM1 + 50);
+    const y = cy_AM1 + Math.sin(midAngle) * (maxRadius_AM1 + 100);
+    ctxAM1.fillText(labels_AM1[i], x, y);
+  }
+}
+
+function drawData_AM1() {
+  for (let i = 0; i < sectors; i++) {
+    const score = data_AM1[i];
+    if (score === 0) continue;
+    const startAngle = (i / sectors) * 2 * Math.PI;
+    const endAngle = ((i + 1) / sectors) * 2 * Math.PI;
+
+    for (let lvl = 0; lvl < score; lvl++) {
+      const innerR = lvl * ringWidth_AM1;
+      const outerR = (lvl + 1) * ringWidth_AM1;
+
+      ctxAM1.beginPath();
+      ctxAM1.fillStyle = "rgba(251,146,60,0.6)";
+      ctxAM1.strokeStyle = "rgba(251,146,60,1)";
+      ctxAM1.lineWidth = 3;
+
+      ctxAM1.moveTo(cx_AM1 + innerR * Math.cos(startAngle), cy_AM1 + innerR * Math.sin(startAngle));
+      ctxAM1.arc(cx_AM1, cy_AM1, outerR, startAngle, endAngle, false);
+      ctxAM1.arc(cx_AM1, cy_AM1, innerR, endAngle, startAngle, true);
+      ctxAM1.closePath();
+      ctxAM1.fill();
+      ctxAM1.stroke();
+    }
+  }
+}
+
+drawRings_AM1();
+drawSectors_AM1();
+drawData_AM1();
+drawLabels_AM1();
+
+});
+
+
+
+
+                    </script>
+
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 筛选功能 JavaScript -->
+<script>
+    // 筛选逻辑
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        const clearButton = document.getElementById('clear-filters');
+        const beerSubFilters = document.getElementById('beer-sub-filters');
+        const wineSubFilters = document.getElementById('wine-sub-filters');  // 新增：定义 Wine 子面板
+        const beerBtn = document.querySelector('button[data-value="Beer"]');
+        const wineBtn = document.querySelector('button[data-value="Wine"]');  // 新增：定义 Wine 按钮
+
+        function applyFilters() {
+            const selectedProductTypes = Array.from(document.querySelectorAll('.filter-btn[data-filter="product-type"].active')).map(btn => btn.dataset.value);
+            const selectedApplications = Array.from(document.querySelectorAll('.filter-btn[data-filter="applications"].active')).map(btn => btn.dataset.value);
+            const selectedRegionalStyles = Array.from(document.querySelectorAll('.filter-btn[data-filter="regional-style"].active')).map(btn => btn.dataset.value);
+            const selectedWineTypes = Array.from(document.querySelectorAll('.filter-btn[data-filter="wine-type"].active')).map(btn => btn.dataset.value);  // 新增：Wine Type 筛选逻辑
+
+            productCards.forEach(card => {
+                const cardProductType = card.dataset.productType;
+                const cardApplications = card.dataset.applications;
+                const cardRegionalStyle = card.dataset.regionalStyle;
+                const cardWineType = card.dataset.wineType;  // 新增：读取 Wine Type
+
+                let showCard = true;
+
+                if (selectedProductTypes.length > 0 && !selectedProductTypes.includes(cardProductType)) {
+                    showCard = false;
+                }
+
+                if (selectedApplications.length > 0 && !selectedApplications.includes(cardApplications)) {
+                    showCard = false;
+                }
+
+                if (selectedRegionalStyles.length > 0 && (!cardRegionalStyle || !selectedRegionalStyles.includes(cardRegionalStyle))) {
+                    showCard = false;
+                }
+
+                if (selectedWineTypes.length > 0 && (!cardWineType || !selectedWineTypes.includes(cardWineType))) {  // 新增：Wine Type 过滤
+                    showCard = false;
+                }
+
+                card.style.display = showCard ? 'block' : 'none';
+            });
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    this.classList.remove('text-gray-600', 'hover:bg-gray-100');
+                    this.classList.add('bg-amber-500', 'text-white');
+                } else {
+                    this.classList.remove('bg-amber-500', 'text-white');
+                    this.classList.add('text-gray-600', 'hover:bg-gray-100');
+                }
+
+                // 处理 Beer 子筛选显示/隐藏
+                if (this === beerBtn) {
+                    if (this.classList.contains('active')) {
+                        beerSubFilters.classList.add('active');
+                    } else {
+                        beerSubFilters.classList.remove('active');
+                        // 清空子筛选
+                        document.querySelectorAll('#beer-sub-filters .filter-btn').forEach(subBtn => {
+                            subBtn.classList.remove('active', 'bg-amber-500', 'text-white');
+                            subBtn.classList.add('text-gray-600', 'hover:bg-gray-100');
+                        });
+                    }
+                }
+
+                // 处理 Wine 子筛选显示/隐藏（修复）
+                if (this === wineBtn) {
+                    if (this.classList.contains('active')) {
+                        wineSubFilters.classList.add('active');
+                    } else {
+                        wineSubFilters.classList.remove('active');
+                        // 清空子筛选
+                        document.querySelectorAll('#wine-sub-filters .filter-btn').forEach(subBtn => {
+                            subBtn.classList.remove('active', 'bg-amber-500', 'text-white');
+                            subBtn.classList.add('text-gray-600', 'hover:bg-gray-100');
+                        });
+                    }
+                }
+
+                applyFilters();
+            });
+        });
+
+        clearButton.addEventListener('click', function() {
+            filterBtns.forEach(btn => {
+                btn.classList.remove('active', 'bg-amber-500', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:bg-gray-100');
+            });
+            beerSubFilters.classList.remove('active');
+            wineSubFilters.classList.remove('active');  // 新增：清空 Wine 子面板
+            applyFilters();
+        });
+
+        // 初始应用筛选（无选中，显示所有）
+        applyFilters();
+    });
+
+
+
+</script>
+
+</body>
+</html>
