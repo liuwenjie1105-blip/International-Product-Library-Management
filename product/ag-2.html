@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>AG-2 | Angel Yeast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .back-btn:hover { transform: translateX(-6px); }
+        .fade-in { opacity: 0; transform: translateY(10px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .properties-intro { @apply mb-6 p-4 bg-amber-50 border-l-4 border-amber-300 rounded-r-lg text-gray-700 italic leading-6; }
+        .properties-intro:hover { @apply shadow-inner bg-amber-100 transition-all duration-300; }
+        .fermentation-section { @apply bg-white rounded-2xl shadow-md p-6 mb-8 relative; }
+        /* 修复图表容器样式，解决无限拉长问题 */
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 20rem;
+            max-height: 30rem; /* 限制最大高度 */
+            height: auto; /* 避免100%高度导致的无限延伸 */
+        }
+        @media (max-width: 768px) {
+            .chart-wrapper { min-height: 18rem; max-height: 25rem; }
+        }
+        @media (min-width: 1024px) {
+            .chart-wrapper { min-height: 24rem; max-height: 35rem; }
+        }
+
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+<div class="max-w-6xl mx-auto py-12 px-6">
+
+    <!-- 返回按钮 -->
+    <a class="inline-flex items-center text-amber-700 font-semibold mb-10 transition back-btn"
+       href="../index.html" style="color: #D4AF37;">
+        ← Back to Product List
+    </a>
+
+    <!-- 产品大图 -->
+    <div class="rounded-2xl overflow-hidden shadow-lg mb-10 fade-in visible">
+        <img alt="BV818"
+             class="w-full h-96 object-contain"
+             loading="lazy"
+             src="../image/AG-2.jpg">
+    </div>
+
+    <!-- 产品标题 -->
+    <h1 class="text-4xl font-bold mb-6 text-center fade-in visible" style="color: #D4AF37;">AG-1</h1>
+    <h1 class="text-2xl font-light italic mb-6 text-center fade-in visible" style="color: #D4AF37;">Grain whisky/Rum</h1>
+
+    <!-- Product Description -->
+    <div class="bg-white rounded-2xl shadow-md p-8 mb-12 fade-in">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6" style="color: #D4AF37;">Product Description</h2>
+            <p class="text-gray-700 leading-7">AG-2 delay period is short and fast yeast, strong fermentation ability, clean wine body,
+balanced taste, suitable for the brewing of wheat, corn and other grain whiskey. It has high
+glucose and ethanol tolerance, and the glycose enzymes preparation can improve the
+utilization rate of maltotriose (MS), monosaccharide with three carbon atoms anddextrin.
+            </p>
+        </div>
+
+    <!-- Brewing Properties -->
+    <div class="bg-white rounded-2xl shadow-md p-8 mb-12 fade-in">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6" style="color: #D4AF37;">Brewing Properties</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-700">
+            <p class="group"><strong class="text-gray-900 group-hover:text-amber-700 transition-colors">Temperature range: </strong> 25–35˚C</p>
+            <p class="group"><strong class="text-gray-900 group-hover:text-amber-700 transition-colors">Apparent attenuation:</strong>>95%</p>
+            <p class="group"><strong class="text-gray-900 group-hover:text-amber-700 transition-colors">Alcohol tolerance: </strong> 18%ABV</p>
+            <p class="group"><strong class="text-gray-900 group-hover:text-amber-700 transition-colors">High gravity suitability: </strong> High</p>
+            <p class="group"><strong class="text-gray-900 group-hover:text-amber-700 transition-colors">Fermentation performance: </strong> High</p>
+        </div>
+    </div>
+
+    <!-- 并列 Flavor Profile & Microbiological Analysis（表格） -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 fade-in">
+        <!-- Flavor Profile -->
+        <div class="bg-white rounded-2xl shadow-md p-8 group hover:shadow-lg transition-all order-1">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-left " style="color: #D4AF37;">Flavor Profile</h2>
+            <div class="flex justify-center min-h-64 w-full">
+                <canvas aria-label="BF27 flavor profile radar chart"
+                        height="1000"
+                        id="AM1-wheel"
+                        style="width:100%; height:100%; display:block; max-width:100%;"
+                        width="1000">
+                </canvas>
+            </div>
+        </div>
+
+        <section class="bg-white rounded-2xl shadow-md p-6 mb-8 fade-in">
+        <h2 class="text-2xl font-bold text-amber-800 mb-4" style="color: #D4AF37;">Microbiological Analysis</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700 border border-gray-200 rounded-lg overflow-hidden">
+            <div class="bg-gray-50 p-3 font-semibold border-b border-gray-200">Species:</div>
+            <div class="p-3 border-b border-gray-200">Saccharomyces cerevisiae</div>
+            <div class="bg-gray-50 p-3 font-semibold border-b border-gray-200">Dry weight:</div>
+            <div class="p-3 border-b border-gray-200">> 94%</div>
+            <div class="bg-gray-50 p-3 font-semibold border-b border-gray-200">Viable yeast:</div>
+            <div class="p-3 border-b border-gray-200">> 20.0*10⁹ cfu/g</div>
+            <div class="bg-gray-50 p-3 font-semibold border-b border-gray-200">Wild yeast:</div>
+            <div class="p-3 border-b border-gray-200">< 3.0*10³ cfu/g</div>
+            <div class="bg-gray-50 p-3 font-semibold border-b border-gray-200">Total bacteria:</div>
+            <div class="p-3 border-b border-gray-200">1.0*10⁴cfu/g</div>
+            <div class="bg-gray-50 p-3 font-semibold border-b border-gray-200">Lactic acid bacteria:</div>
+            <div class="p-3 border-b border-gray-200">: < 1.0*10⁴ cfu/g</div>
+        </div>
+            <div class="mt-4 text-sm text-gray-600 text-left" style="color: #D4AF37;">
+                    Pathogenic micro-organisms: in accordance with regulation; before releasing to markets, all products must pass a series of detection in our factory
+                </div>
+    </section>
+
+    </section>
+
+    <!-- Fermentation Profile（单个图表） -->
+    <section class="fermentation-section fade-in">
+        <div class="bg-white rounded-2xl shadow-md p-8 mb-12 fade-in">
+            <h2 class="text-2xl font-bold text-amber-800 mb-4 text-center" style="color: #D4AF37;">Fermentation Profile</h2>
+            <div class="flex-1 text-gray-700 space-y-3 text-base mb-6 text-center" style="color: #D4AF37;">
+                <p> Utilization of sugars in wort by AG-2</p>
+            </div>
+        <!-- 单个图表容器 -->
+            <div class="chart-wrapper">
+                <canvas id="fermentationChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Product Comparison Table -->
+    <section class="bg-white rounded-2xl shadow-md p-6 mb-12 fade-in">
+        <h2 class="text-2xl font-bold text-amber-800 mb-6 text-center" style="color: #D4AF37;">Product Comparison</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full border border-gray-300 text-sm text-gray-700">
+                <thead class="bg-gray-100 text-gray-900">
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Product</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">SPECIES</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">BEER STYLES</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">FLOCCULATION</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">ATTENUATION</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">TEMPERATURE RANGE</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">ALCOHOL TOLERANCE</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">PITCHING RATE</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-semibold">BF27</td>
+                    <td class="border border-gray-300 px-4 py-2">Saccharomyces pastorianus</td>
+                    <td class="border border-gray-300 px-4 py-2">Lager</td>
+                    <td class="border border-gray-300 px-4 py-2">High</td>
+                    <td class="border border-gray-300 px-4 py-2">80–85%</td>
+                    <td class="border border-gray-300 px-4 py-2">10–20°C</td>
+                    <td class="border border-gray-300 px-4 py-2">10% ABV</td>
+                    <td class="border border-gray-300 px-4 py-2">80–150 g/hl</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-semibold">CN36</td>
+                    <td class="border border-gray-300 px-4 py-2">Saccharomyces cerevisiae</td>
+                    <td class="border border-gray-300 px-4 py-2">British Ale</td>
+                    <td class="border border-gray-300 px-4 py-2">Medium</td>
+                    <td class="border border-gray-300 px-4 py-2">74–78%</td>
+                    <td class="border border-gray-300 px-4 py-2">18–25°C</td>
+                    <td class="border border-gray-300 px-4 py-2">8% ABV</td>
+                    <td class="border border-gray-300 px-4 py-2">50–100 g/hl</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-semibold">BV818</td>
+                    <td class="border border-gray-300 px-4 py-2">Saccharomyces cerevisiae</td>
+                    <td class="border border-gray-300 px-4 py-2">Wine / Multi-purpose</td>
+                    <td class="border border-gray-300 px-4 py-2">Medium to High</td>
+                    <td class="border border-gray-300 px-4 py-2">90–95%</td>
+                    <td class="border border-gray-300 px-4 py-2">15–30°C</td>
+                    <td class="border border-gray-300 px-4 py-2">15% ABV</td>
+                    <td class="border border-gray-300 px-4 py-2">20–40 g/hl</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2 font-semibold">PM16</td>
+                    <td class="border border-gray-300 px-4 py-2">Saccharomyces cerevisiae</td>
+                    <td class="border border-gray-300 px-4 py-2">White Wine</td>
+                    <td class="border border-gray-300 px-4 py-2">Low</td>
+                    <td class="border border-gray-300 px-4 py-2">92–98%</td>
+                    <td class="border border-gray-300 px-4 py-2">12–22°C</td>
+                    <td class="border border-gray-300 px-4 py-2">16% ABV</td>
+                    <td class="border border-gray-300 px-4 py-2">20–40 g/hl</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Usage -->
+    <section class="bg-white rounded-2xl shadow-md p-8 mb-12 fade-in">
+        <h2 class="text-2xl font-bold text-amber-800 mb-4" style="color: #D4AF37;">Usage</h2>
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl font-bold mb-3" style="color: #D4AF37;">Rehydration:</h3>
+                <p class="text-gray-700 leading-6">1. Rehydrate the yeast in 10 times its weight of water at 36–38°C (97°F–100°F) for 20 minutes. Stir the mixture and then inoculate into the fermentor.</p>
+                <p class="text-gray-700 leading-6">2. If there is a temperature difference of more than 8°C between the substrate to be inoculated and the rehydration solution, add some substrate into the rehydration solution to reduce this temperature difference.</p>
+                <p class="text-gray-700 leading-6">3. Once the sealed-vacuum bag is open or broken, use the yeast promptly .</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-722F37 mb-3" style="color: #D4AF37;">Dosage:</h3>
+                <p class="text-gray-700 leading-6">
+                    50 to 100 g/hl, increasing yeast dosage under difficult fermentation conditions and high gravity.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dosage & Package（双列悬浮卡片） -->
+    <section class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8 fade-in">
+        <div class="bg-white rounded-2xl shadow-md p-6">
+            <h3 class="text-xl font-bold text-amber-800 mb-3" style="color: #D4AF37;">Storage</h3>
+            <p class="text-gray-700 leading-6">
+                Store in low temperature (≤10˚C) and dry place, with the shelf life of 24 months.
+            </p>
+        </div>
+    </section>
+
+    <!-- Related Products（3 列网格） -->
+    <section class="mb-12 fade-in">
+        <h2 class="text-2xl font-bold text-amber-800 mb-6 text-center" style="color: #D4AF37;">Related Products</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a class="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition-all group"
+               href="../product/CN36.html">
+                <img alt="CN36" class="w-full h-32 object-cover rounded-lg mb-2" src="../image/CN36.jpg">
+                <h3 class="font-semibold text-gray-900 group-hover:text-amber-700">CN36</h3>
+                <p class="text-sm text-gray-600">British Ale Yeast</p>
+            </a>
+            <a class="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition-all group"
+               href="../product/BV818.html">
+                <img alt="BV818" class="w-full h-32 object-cover rounded-lg mb-2" src="../image/BV818.jpg">
+                <h3 class="font-semibold text-gray-900 group-hover:text-amber-700">BV818</h3>
+                <p class="text-sm text-gray-600">Multi-Purpose Wine Yeast</p>
+            </a>
+            <a class="bg-white rounded-2xl shadow-md p-4 hover:shadow-lg transition-all group"
+               href="../product/PM16.html">
+                <img alt="PM16" class="w-full h-32 object-cover rounded-lg mb-2" src="../image/PM16.jpg">
+                <h3 class="font-semibold text-gray-900 group-hover:text-amber-700">PM16</h3>
+                <p class="text-sm text-gray-600">White Wine Yeast</p>
+            </a>
+        </div>
+    </section>
+
+    <!--Related Content（ul 列表） -->
+    <section class="bg-white rounded-2xl shadow-md p-6 mb-12 fade-in">
+        <h2 class="text-2xl font-bold text-amber-800 mb-4" style="color: #D4AF37;">Related Content</h2>
+        <ul class="space-y-2 text-gray-700">
+            <li><a class="hover:text-amber-700 hover:underline transition-colors" href="#">Guide to Lager Fermentation
+                Techniques</a></li>
+            <li><a class="hover:text-amber-700 hover:underline transition-colors" href="#">Yeast Selection for Crisp
+                Beers</a></li>
+            <li><a class="hover:text-amber-700 hover:underline transition-colors" href="#">Microbiological Best
+                Practices in Brewing</a></li>
+            <li><a class="hover:text-amber-700 hover:underline transition-colors" href="#">Storage Tips for Dry Yeast
+                Strains</a></li>
+        </ul>
+    </section>
+
+</div>
+
+<!-- 滚动动画 -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+});
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+</script>
+
+<!-- 雷达图脚本 -->
+<script>
+window.addEventListener("load", () => {
+
+const canvasAM1 = document.getElementById('AM1-wheel');
+const ctxAM1 = canvasAM1.getContext('2d');
+
+const W_AM1 = canvasAM1.width;
+const H_AM1 = canvasAM1.height;
+const cx_AM1 = W_AM1 / 2;
+const cy_AM1 = H_AM1 / 2;
+
+const sectors = 12;
+const levels = 5;
+const data_AM1 = [2, 1, 1, 4, 1, 1, 4, 4, 4, 4, 1, 1];
+const labels_AM1 = ['Nutty','Sulphury','Meaty','Lumber','Dark Fruits','Peaty','Cereal','Sweet','Green Apple','Clean','Fruity/Estery','Floral'];
+const padding_AM1 = 10;
+const maxRadius_AM1 = Math.min(W_AM1, H_AM1) * 0.4 - padding_AM1;
+const ringWidth_AM1 = maxRadius_AM1 / levels;
+
+function drawRings_AM1() {
+  ctxAM1.strokeStyle = "#ddd";
+  ctxAM1.lineWidth = 1;
+  for (let i = 1; i <= levels; i++) {
+    ctxAM1.beginPath();
+    ctxAM1.arc(cx_AM1, cy_AM1, i * ringWidth_AM1, 0, 2 * Math.PI);
+    ctxAM1.stroke();
+  }
+}
+
+function drawSectors_AM1() {
+  ctxAM1.strokeStyle = "#ccc";
+  ctxAM1.lineWidth = 1;
+  for (let i = 0; i < sectors; i++) {
+    const angle = (i / sectors) * 2 * Math.PI;
+    const x = cx_AM1 + Math.cos(angle) * maxRadius_AM1;
+    const y = cy_AM1 + Math.sin(angle) * maxRadius_AM1;
+    ctxAM1.beginPath();
+    ctxAM1.moveTo(cx_AM1, cy_AM1);
+    ctxAM1.lineTo(x, y);
+    ctxAM1.stroke();
+  }
+}
+
+function drawLabels_AM1() {
+  ctxAM1.font = "600 " + Math.floor(maxRadius_AM1 * 0.12) + "px Arial";
+  ctxAM1.fillStyle = "#D4AF37";
+  ctxAM1.textAlign = "center";
+  ctxAM1.textBaseline = "middle";
+
+  for (let i = 0; i < sectors; i++) {
+    const midAngle = (i + 0.5) / sectors * 2 * Math.PI;
+    const x = cx_AM1 + Math.cos(midAngle) * (maxRadius_AM1 + 50);
+    const y = cy_AM1 + Math.sin(midAngle) * (maxRadius_AM1 + 100);
+    ctxAM1.fillText(labels_AM1[i], x, y);
+  }
+}
+
+function drawData_AM1() {
+  for (let i = 0; i < sectors; i++) {
+    const score = data_AM1[i];
+    if (score === 0) continue;
+    const startAngle = (i / sectors) * 2 * Math.PI;
+    const endAngle = ((i + 1) / sectors) * 2 * Math.PI;
+
+    for (let lvl = 0; lvl < score; lvl++) {
+      const innerR = lvl * ringWidth_AM1;
+      const outerR = (lvl + 1) * ringWidth_AM1;
+
+      ctxAM1.beginPath();
+      ctxAM1.fillStyle = "rgba(212, 175, 55, 0.6)";
+      ctxAM1.strokeStyle = "rgba(212, 175, 55, 0.3)";
+      ctxAM1.lineWidth = 3;
+
+      ctxAM1.moveTo(cx_AM1 + innerR * Math.cos(startAngle), cy_AM1 + innerR * Math.sin(startAngle));
+      ctxAM1.arc(cx_AM1, cy_AM1, outerR, startAngle, endAngle, false);
+      ctxAM1.arc(cx_AM1, cy_AM1, innerR, endAngle, startAngle, true);
+      ctxAM1.closePath();
+      ctxAM1.fill();
+      ctxAM1.stroke();
+    }
+  }
+}
+
+drawRings_AM1();
+drawSectors_AM1();
+drawData_AM1();
+drawLabels_AM1();
+
+});
+
+
+
+
+
+
+                    </script>
+
+<!-- 单个图表脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // PM16低温发酵表现图表
+    const ctxFer = document.getElementById('fermentationChart').getContext('2d');
+    new Chart(ctxFer, {
+        type: 'line',
+        data: {
+            labels: ['0', '5', '10', '15', '20'],
+            datasets: [
+                {
+                    label: 'PM16 (12°C)',
+                    data: [1.080, 1.050, 1.025, 1.010, 1.005],
+                    borderColor: '#D4AF37',
+                    backgroundColor: 'rgba(114, 47, 55, 0.1)',
+                    tension: 0.4,
+                    fill: false
+                },
+                {
+                    label: 'Traditional Yeast (12°C)',
+                    data: [1.080, 1.070, 1.055, 1.035, 1.020],
+                    borderColor: '#94A3B8',
+                    backgroundColor: 'rgba(148, 163, 184, 0.1)',
+                    tension: 0.4,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 2,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: { display: true, text: 'Gravity' }
+                },
+                x: {
+                    title: { display: true, text: 'Day' }
+                }
+            },
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.parsed.y}`;
+                        }
+                    }
+                }
+            },
+            animation: { duration: 1500, easing: 'easeInOutQuart' }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
